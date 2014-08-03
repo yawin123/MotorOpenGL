@@ -1,0 +1,108 @@
+# depslib dependency file v1.0
+1407107178 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/main.cpp
+	<iostream>
+	"ventana.h"
+	"maya.h"
+	"pieza.h"
+	"camara.h"
+	"secuencia.h"
+
+1406677817 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/ventana.h
+	<SDL2/SDL.h>
+	<string>
+
+1406844628 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/ventana.cpp
+	"ventana.h"
+	<GL/glew.h>
+	<iostream>
+
+1406845504 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/maya.cpp
+	"maya.h"
+	"obj_loader.h"
+	<vector>
+	<iostream>
+
+1406845444 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/maya.h
+	<glm/glm.hpp>
+	<GL/glew.h>
+	"obj_loader.h"
+
+1406842511 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/shader.cpp
+	"shader.h"
+	<fstream>
+	<iostream>
+
+1406833707 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/shader.h
+	<string>
+	<GL/glew.h>
+	"transform.h"
+	"camara.h"
+
+1407083630 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/transform.h
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1407107486 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.h
+	<vector>
+	"shader.h"
+	"maya.h"
+	"transform.h"
+	"textura.h"
+	"camara.h"
+
+1407009563 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.cpp
+	"pieza.h"
+	"textura.h"
+	<iostream>
+	<fstream>
+	<math.h>
+
+1406829853 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/textura.h
+	<string>
+	<GL/glew.h>
+
+1406639441 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/stb_image.c
+	"stb_image.h"
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<assert.h>
+	<stdarg.h>
+
+1406639405 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/stb_image.h
+	<stdio.h>
+
+1406830772 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/textura.cpp
+	"textura.h"
+	"stb_image.h"
+	<cassert>
+	<iostream>
+
+1407100457 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/camara.h
+	<vector>
+	"camara.h"
+	"pieza.h"
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1406835390 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/obj_loader.cpp
+	"obj_loader.h"
+	<fstream>
+	<iostream>
+	<algorithm>
+	<map>
+
+1406835355 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/obj_loader.h
+	<glm/glm.hpp>
+	<vector>
+	<string>
+
+1407107212 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/secuencia.h
+	<iostream>
+	<vector>
+	<glm/glm.hpp>
+	"pieza.h"
+	"camara.h"
+

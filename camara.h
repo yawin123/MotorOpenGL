@@ -2,8 +2,6 @@
 #define CAMARA_H
 
 #include <vector>
-#include "camara.h"
-#include "pieza.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -12,10 +10,10 @@ class Camara
     public:
         Camara(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar)
         {
-            m_perspectiva=glm::perspective(fov,aspect,zNear,zFar);
-            m_posicion=pos;
-            m_delante=glm::vec3(0.0f,0.0f,1.0f);
-            m_arriba=glm::vec3(0.0f,1.0f,0.0f);
+            this->m_perspectiva=glm::perspective(fov,aspect,zNear,zFar);
+            this->m_posicion=pos;
+            this->m_delante=glm::vec3(0.0f,0.0f,1.0f);
+            this->m_arriba=glm::vec3(0.0f,1.0f,0.0f);
         }
 
         inline glm::mat4 GetViewProjection() const

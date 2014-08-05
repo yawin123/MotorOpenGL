@@ -7,7 +7,6 @@
 #include "textura.h"
 #include "camara.h"
 
-
 class Pieza
 {
     public:
@@ -36,8 +35,10 @@ class Pieza
         inline glm::vec3& getRot(){return t.getRot();}
         inline glm::vec3& getScale(){return t.getScale();}
         inline unsigned int& getrVel(){return rewVel;}
+        inline unsigned int& getfVel(){return fwVel;}
         inline bool& getPlay(){return isPlay;}
         inline bool& getLoop(){return isLoop;}
+        void Frame(long int f);
 
         inline void Rewind(){if(isRewind)isRewind=false; else isRewind=true;  isFfwd=false; }
         inline void Ffwd()  {if(isFfwd) isFfwd=false; else isFfwd=true;  isRewind=false;  }

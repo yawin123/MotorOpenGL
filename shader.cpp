@@ -22,11 +22,11 @@ Shader::Shader(const std::string& fileName)
     glBindAttribLocation(m_programa,1,"texCoord");
     glBindAttribLocation(m_programa,2,"normal");
 
-    std::cerr<<"Linkando el shader:"<< std::endl;
+    std::cerr<<"Linkando el shader: ";
     glLinkProgram(m_programa);
     CheckShaderError(m_programa,GL_LINK_STATUS,true,"Error, el programa ha fallado al linkear el shader: ");
 
-    std::cerr<<"Validando el shader:"<< std::endl;
+    std::cerr<<"Validando el shader: ";
     glValidateProgram(m_programa);
     CheckShaderError(m_programa,GL_VALIDATE_STATUS,true,"Error, el programa es inválido: ");
 
@@ -94,7 +94,7 @@ static GLuint creaShader(const std::string& text, GLenum shaderType)
   glShaderSource(shader,1,shaderSourceStrings,NULL);
   glCompileShader(shader);
 
-  std::cerr<<"Comprobando errores en "<< shader <<":" <<std::endl;
+  std::cerr<<"Comprobando errores en "<< shader <<": ";
   CheckShaderError(shader,GL_COMPILE_STATUS,false,"Error, ha fallado la compilacion del shader: ");
 
   return shader;

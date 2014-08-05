@@ -45,6 +45,8 @@
 		<Unit filename="obj_loader.h" />
 		<Unit filename="pieza.cpp" />
 		<Unit filename="pieza.h" />
+		<Unit filename="secuencia.cpp" />
+		<Unit filename="secuencia.h" />
 		<Unit filename="shader.cpp" />
 		<Unit filename="shader.h" />
 		<Unit filename="stb_image.c">

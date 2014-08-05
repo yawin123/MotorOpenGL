@@ -302,31 +302,70 @@ void Pieza::mueve()
         {
             if(isPlay)tActual++;
         }
+
+        if(tActual>trayectop.size()-1)
+        {
+            if(!isLoop)
+                tActual=trayectop.size()-1;
+            else
+                tActual=0;
+        }
     }
     else
     {
         if(isPlay)tActual-=rewVel;
-    }
 
-    if(tActual>trayectop.size()-1)
-    {
-        if(!isLoop)
-            tActual=trayectop.size()-1;
-        else
-            tActual=0;
-    }
-    else
-    {
-        if(tActual<1)
+        if(tActual<0)
         {
             if(isLoop)
                 tActual=trayectop.size()-1;
             else
-                tActual=1;
+                tActual=0;
         }
-     }
+    }
+
 
     t.setPos(trayectop[tActual]);
     t.setRot(trayector[tActual]);
     t.setScale(trayectos[tActual]);
+}
+
+void Pieza::Frame(long int i)
+{
+    if(isLoop)
+    {
+        if(i<0)
+        {
+            while(i<0)
+            {
+                i=(trayectop.size()-1)-abs(i);
+            }
+        }
+        else
+        {
+            if(i>trayectop.size()-1)
+            {
+                while(i>trayectop.size()-1)
+                {
+                    i-=trayectop.size()-1;
+                }
+            }
+        }
+    }
+    else
+    {
+        if(i<1)
+        {
+            i=1;
+        }
+        else
+        {
+            if(i>trayectop.size()-1)
+            {
+                i=trayectop.size()-1;
+            }
+        }
+    }
+
+    tActual=i;
 }

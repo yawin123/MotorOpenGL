@@ -12,7 +12,7 @@ class Transform
                 this->m_pos = pos;
                 this->m_rot = rot;
                 this->m_scale = scale;
-}
+            }
 
         inline glm::mat4 getModel() const
         {

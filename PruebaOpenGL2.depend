@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1407107178 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/main.cpp
+1407178663 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/main.cpp
 	<iostream>
 	"ventana.h"
 	"maya.h"
 	"pieza.h"
 	"camara.h"
 	"secuencia.h"
+	<vector>
 
 1406677817 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/ventana.h
 	<SDL2/SDL.h>
@@ -27,7 +28,7 @@
 	<GL/glew.h>
 	"obj_loader.h"
 
-1406842511 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/shader.cpp
+1407192013 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/shader.cpp
 	"shader.h"
 	<fstream>
 	<iostream>
@@ -38,11 +39,11 @@
 	"transform.h"
 	"camara.h"
 
-1407083630 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/transform.h
+1407151366 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/transform.h
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
-1407107486 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.h
+1407169789 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.h
 	<vector>
 	"shader.h"
 	"maya.h"
@@ -50,7 +51,7 @@
 	"textura.h"
 	"camara.h"
 
-1407009563 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.cpp
+1407169817 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/pieza.cpp
 	"pieza.h"
 	"textura.h"
 	<iostream>
@@ -80,10 +81,8 @@
 	<cassert>
 	<iostream>
 
-1407100457 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/camara.h
+1407152226 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/camara.h
 	<vector>
-	"camara.h"
-	"pieza.h"
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
@@ -99,10 +98,12 @@
 	<vector>
 	<string>
 
-1407107212 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/secuencia.h
+1407168264 /home/yawin/Dokumentuak/Dev/PruebaOpenGL2/secuencia.h
 	<iostream>
 	<vector>
 	<glm/glm.hpp>
 	"pieza.h"
-	"camara.h"
+
+1407177593 source:/home/yawin/Dokumentuak/Dev/PruebaOpenGL2/secuencia.cpp
+	"secuencia.h"
 

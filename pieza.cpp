@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <cstdlib>
 
 Pieza::Pieza(Vertice* vertices, unsigned int numVertices,const std::string& fileName,const std::string& texName)
 {
@@ -115,7 +116,7 @@ void Pieza::cargaTrayecto(const std::string& fileName)
                         {
                             st+=linea[iy];
                         }
-                        aux.push_back(atof(st.c_str()));
+                        aux.push_back(std::atof(st.c_str()));
                     }
                     ding=0;
                     j=i;

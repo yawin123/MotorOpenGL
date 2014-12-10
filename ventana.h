@@ -8,6 +8,7 @@ class Ventana
 {
     public:
         Ventana(int width, int height, const std::string& title);
+        Ventana(const Ventana& other);
 
         void Clear(float r, float g, float b, float a);
         void Update();
@@ -16,7 +17,6 @@ class Ventana
         virtual ~Ventana();
     protected:
     private:
-        Ventana(const Ventana& other);
         void operator=(const Ventana& other);
 
         SDL_Window* m_ventana;

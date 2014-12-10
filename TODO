@@ -1,2 +1,6 @@
-- Reprogramar el parseador de animaciones, así como el interpolador de bezier y el constructor de las piezas para poder asignar las animaciones con vectores y no con coordenadas cartesianas.
+COSAS POR HACER:
+
+- Reprogramar el parseador de animaciones, así como el interpolador de bezier y el constructor 
+de las piezas para poder asignar las animaciones con vectores y no con coordenadas cartesianas.
+
 - Añadir audio. 

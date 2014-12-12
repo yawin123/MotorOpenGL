@@ -11,7 +11,7 @@ class Pieza
 {
     public:
         Pieza(Vertice* vertices, unsigned int numVertices,const std::string& fileName,const std::string& texName);
-        Pieza(const std::string& modelName,const std::string& fileName,const std::string& texName);
+        Pieza(const std::string& modelName,const std::string& fileName,const std::string& texName,  const glm::vec3& p, const glm::vec3& r, const glm::vec3& s);
         void Update(const Camara& camara);
 
         void cargaTrayecto(const std::string& fileName);

@@ -216,7 +216,7 @@
 	<GL/glew.h>
 	<iostream>
 
-1418147424 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/main.cpp
+1418418170 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/main.cpp
 	<iostream>
 	"ventana.h"
 	"maya.h"
@@ -224,6 +224,7 @@
 	"camara.h"
 	"secuencia.h"
 	<vector>
+	<glm/glm.hpp>
 
 1418070438 /home/yawin/Dokumentuak/Dev/MotorOpenGL/ventana.h
 	<SDL2/SDL.h>
@@ -239,7 +240,7 @@
 	<vector>
 	<string>
 
-1418070438 /home/yawin/Dokumentuak/Dev/MotorOpenGL/pieza.h
+1418415589 /home/yawin/Dokumentuak/Dev/MotorOpenGL/pieza.h
 	<vector>
 	"shader.h"
 	"maya.h"
@@ -266,14 +267,14 @@
 	<string>
 	<GL/glew.h>
 
-1418070438 /home/yawin/Dokumentuak/Dev/MotorOpenGL/secuencia.h
+1418412034 /home/yawin/Dokumentuak/Dev/MotorOpenGL/secuencia.h
 	<iostream>
 	<vector>
 	<glm/glm.hpp>
 	"ventana.h"
 	"pieza.h"
 
-1418070438 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/maya.cpp
+1418418114 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/maya.cpp
 	"maya.h"
 	"obj_loader.h"
 	<vector>
@@ -286,7 +287,7 @@
 	<algorithm>
 	<map>
 
-1418146980 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/pieza.cpp
+1418418046 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/pieza.cpp
 	"pieza.h"
 	"textura.h"
 	<iostream>
@@ -294,7 +295,7 @@
 	<math.h>
 	<cstdlib>
 
-1418070438 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/secuencia.cpp
+1418417803 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/secuencia.cpp
 	"secuencia.h"
 
 1418070438 source:/home/yawin/Dokumentuak/Dev/MotorOpenGL/shader.cpp

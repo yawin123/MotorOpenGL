@@ -10,10 +10,10 @@ Secuencia::~Secuencia()
     //dtor
 }
 
-void Secuencia::addElemento(const std::string& modelName,const std::string& fileName,const std::string& texName, const std::string& animName)
+void Secuencia::addElemento(const std::string& modelName,const std::string& fileName,const std::string& texName,  const glm::vec3& p, const glm::vec3& r, const glm::vec3& s, const std::string& animName)
 {
-    Pieza* p=new Pieza(modelName,fileName,texName);
-    elementos.push_back(p);
+    Pieza* piez=new Pieza(modelName,fileName,texName,p,r,s);
+    elementos.push_back(piez);
 
     if(animName!="")
         elementos[elementos.size()-1]->cargaTrayecto(animName);

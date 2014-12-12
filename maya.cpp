@@ -65,6 +65,7 @@ void Maya::Draw()
 {
     glBindVertexArray(m_vertexArrayObject);
     glDrawElements(GL_TRIANGLES,m_drawCount,GL_UNSIGNED_INT,0);
+        std::cout<<"2"<<std::endl;
     //glDrawArrays(GL_TRIANGLES,0,m_drawCount);
     glBindVertexArray(0);
 }

@@ -18,7 +18,7 @@ class Secuencia
         Secuencia(int width, int height);
         virtual ~Secuencia();
 
-        void addElemento(const std::string& modelName,const std::string& fileName,const std::string& texName, const std::string& animName="");
+        void addElemento(const std::string& modelName,const std::string& fileName,const std::string& texName, const glm::vec3& p, const glm::vec3& r, const glm::vec3& s, const std::string& animName="");
         void setCam(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar);
         inline Camara* getCam(){return cam;}
         void Frame(int f);

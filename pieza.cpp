@@ -11,11 +11,14 @@ Pieza::Pieza(Vertice* vertices, unsigned int numVertices,const std::string& file
     shader=new Shader(fileName);
     textura=new Textura(texName);
 }
-Pieza::Pieza(const std::string& modelName,const std::string& fileName,const std::string& texName)
+Pieza::Pieza(const std::string& modelName,const std::string& fileName,const std::string& texName, const glm::vec3& p, const glm::vec3& r, const glm::vec3& s)
 {
     maya=new Maya(modelName);
     shader=new Shader(fileName);
     textura=new Textura(texName);
+    t.getPos().x=p.x; t.getPos().y=p.y; t.getPos().z=p.z;
+    t.getRot().x=r.x; t.getRot().y=r.y; t.getRot().z=r.z;
+    t.getScale().x=s.x; t.getScale().y=s.y; t.getScale().z=s.z;
 }
 
 Pieza::~Pieza()
@@ -38,56 +41,81 @@ void Pieza::Update(const Camara& camara)
 
 void Pieza::addTrayecto(const glm::vec3& p,const glm::vec3& r,const glm::vec3& s)
 {
-    trayectop.push_back(p);
-    trayector.push_back(r);
-    trayectos.push_back(s);
+    glm::vec3 finalPosition,finalRotation,finalScale;
+
+    finalPosition.x = t.getPos().x + p.x*std::cos((p.y*M_PI)/180) * std::cos((p.z*M_PI)/180);
+    finalPosition.y = t.getPos().y + p.x*std::sin((p.y*M_PI)/180) * std::cos((p.z*M_PI)/180);
+    finalPosition.z = t.getPos().z + p.x*std::sin((p.z*M_PI)/180);
+
+    finalRotation.x = t.getRot().x + r.x * std::cos((r.y*M_PI)/180) * std::cos((r.z*M_PI)/180);
+    finalRotation.y = t.getRot().y + r.x * std::sin((r.y*M_PI)/180) * std::cos((r.z*M_PI)/180);
+    finalRotation.z = t.getRot().z + r.x * std::sin((r.z*M_PI)/180);
+
+    finalScale.x = t.getScale().x + s.x*std::cos((s.y*M_PI)/180) * std::cos((s.z*M_PI)/180);
+    finalScale.y = t.getScale().y + s.x*std::sin((s.y*M_PI)/180) * std::cos((s.z*M_PI)/180);
+    finalScale.z = t.getScale().z + s.x*std::sin((s.z*M_PI)/180);
+
+    trayectop.push_back(finalPosition);
+    trayector.push_back(finalRotation);
+    trayectos.push_back(finalScale);
 }
 void Pieza::addTrayecto(const glm::vec3& tr, unsigned int opc)
 {
     switch(opc)
     {
-        case 0:
+        case 0: //Posición
             if(trayectop.size()>0)
             {
+                glm::vec3 aux; aux.x=trayectop[trayectop.size()-1].x+tr.x; aux.y=trayectop[trayectop.size()-1].y+tr.y; aux.z=trayectop[trayectop.size()-1].z+tr.z;
+                trayectop.push_back(aux); //Asignamos la misma rotación que en el paso anterior;
                 trayector.push_back(trayector[trayector.size()-1]); //Asignamos la misma rotación que en el paso anterior;
                 trayectos.push_back(trayectos[trayectos.size()-1]); //Asignamos la misma escala que en el paso anterior;
             }
             else
             {
+                glm::vec3 aux; aux.x=getPos().x+tr.x; aux.y=getPos().y+tr.y; aux.z=getPos().z+tr.z;
+                trayectop.push_back(aux);
                 trayector.push_back(t.getRot());
                 trayectos.push_back(t.getScale());
             }
-            trayectop.push_back(tr);                             //Asignamos la nueva posición;
             break;
-        case 1:
+
+        case 1: //Rotación
             if(trayectop.size()>0)
             {
+                glm::vec3 aux; aux.x=trayector[trayector.size()-1].x+tr.x; aux.y=trayector[trayector.size()-1].y+tr.y; aux.z=trayector[trayector.size()-1].z+tr.z;
                 trayectop.push_back(trayectop[trayectop.size()-1]); //Asignamos la misma posición que en el paso anterior;
+                trayector.push_back(aux); //Asignamos la misma posición que en el paso anterior;
                 trayectos.push_back(trayectos[trayectos.size()-1]); //Asignamos la misma escala que en el paso anterior;
             }
             else
             {
+                glm::vec3 aux; aux.x=getRot().x+tr.x; aux.y=getRot().y+tr.y; aux.z=getRot().z+tr.z;
                 trayectop.push_back(t.getPos());
+                trayector.push_back(aux);
                 trayectos.push_back(t.getScale());
             }
-            trayector.push_back(tr);                             //Asignamos la nueva rotación;
             break;
-        case 2:
+
+        case 2: //Escala
             if(trayectop.size()>0)
             {
+                glm::vec3 aux; aux.x=trayectos[trayectos.size()-1].x+tr.x; aux.y=trayectos[trayectos.size()-1].y+tr.y; aux.z=trayectos[trayectos.size()-1].z+tr.z;
                 trayectop.push_back(trayectop[trayectop.size()-1]); //Asignamos la misma posición que en el paso anterior;
                 trayector.push_back(trayector[trayector.size()-1]); //Asignamos la misma rotación que en el paso anterior;
+                trayectos.push_back(aux); //Asignamos la misma posición que en el paso anterior;
             }
             else
             {
+                glm::vec3 aux; aux.x=getScale().x+tr.x; aux.y=getScale().y+tr.y; aux.z=getScale().z+tr.z;
                 trayectop.push_back(t.getPos());
                 trayector.push_back(t.getRot());
+                trayectos.push_back(aux);
             }
-            trayectos.push_back(tr);                             //Asignamos la nueva escala;
             break;
     }
 }
-void Pieza::cargaTrayecto(const std::string& fileName)
+void Pieza::cargaTrayecto(const std::string& fileName) //Parseador de animaciones
 {
     std::ifstream lector;
     lector.open((fileName).c_str());
@@ -126,7 +154,6 @@ void Pieza::cargaTrayecto(const std::string& fileName)
                     ding=1;
                 }
             }
-
             switch(opc)
             {
                 case 48: //48 ASCII = int 0
@@ -179,7 +206,13 @@ void Pieza::cargaTrayecto(const std::string& fileName)
 }
 void Pieza::addTrayectoBez(const glm::mat3x3& prs,const glm::mat3x3& vec1,const glm::mat3x3& vec2,unsigned int temp)
 {
-    glm::mat3x3 prs0;{
+    //prs0 son las coordenadas de inicio
+    //prs1 son las coordenadas relativas a prs0 del vector1
+    //prs2 son las coordenadas relativas a prs del vector2
+    //prs  son las coordenadas de destino
+
+    glm::mat3x3 prs0;{ //Inicio
+
         prs0[0][0]=trayectop[trayectop.size()-1].x;
         prs0[0][1]=trayectop[trayectop.size()-1].y;
         prs0[0][2]=trayectop[trayectop.size()-1].z;
@@ -189,6 +222,18 @@ void Pieza::addTrayectoBez(const glm::mat3x3& prs,const glm::mat3x3& vec1,const 
         prs0[2][0]=trayectos[trayectos.size()-1].x;
         prs0[2][1]=trayectos[trayectos.size()-1].y;
         prs0[2][2]=trayectos[trayectos.size()-1].z;
+    }
+    glm::mat3x3 prs4;{ //Destino
+
+        prs4[0][0] = prs0[0][0] + prs[0][0] * std::cos((prs[0][1]*M_PI)/180) * std::cos((prs[0][2]*M_PI)/180);
+        prs4[0][1] = prs0[0][1] + prs[0][0] * std::sin((prs[0][1]*M_PI)/180) * std::cos((prs[0][2]*M_PI)/180);
+        prs4[0][2] = prs0[0][2] + prs[0][0] * std::sin((prs[0][2]*M_PI)/180);
+        prs4[1][0] = prs0[1][0] + prs[1][0] * std::cos((prs[1][1]*M_PI)/180) * std::cos((prs[1][2]*M_PI)/180);
+        prs4[1][1] = prs0[1][1] + prs[1][0] * std::sin((prs[1][1]*M_PI)/180) * std::cos((prs[1][2]*M_PI)/180);
+        prs4[1][2] = prs0[1][2] + prs[1][0] * std::sin((prs[1][2]*M_PI)/180);
+        prs4[2][0] = prs0[2][0] + prs[2][0] * std::cos((prs[2][1]*M_PI)/180) * std::cos((prs[2][2]*M_PI)/180);
+        prs4[2][1] = prs0[2][1] + prs[2][0] * std::sin((prs[2][1]*M_PI)/180) * std::cos((prs[2][2]*M_PI)/180);
+        prs4[2][2] = prs0[2][2] + prs[2][0] * std::sin((prs[2][2]*M_PI)/180);
     }
     glm::mat3x3 prs1;{
         prs1[0][0]=prs0[0][0]+vec1[0][0]*cosf(vec1[0][1])*cosf(vec1[0][2]);
@@ -204,17 +249,17 @@ void Pieza::addTrayectoBez(const glm::mat3x3& prs,const glm::mat3x3& vec1,const 
         prs1[2][2]=prs0[2][2]+vec1[2][0]*sinf(vec1[2][2]);
     }
     glm::mat3x3 prs2;{
-        prs2[0][0]=prs[0][0]+vec2[0][0]*cosf(vec2[0][1])*cosf(vec2[0][2]);
-        prs2[0][1]=prs[0][1]+vec2[0][0]*sinf(vec2[0][1])*cosf(vec2[0][2]);
-        prs2[0][2]=prs[0][2]+vec2[0][0]*sinf(vec2[0][2]);
+        prs2[0][0]=prs4[0][0]+vec2[0][0]*cosf(vec2[0][1])*cosf(vec2[0][2]);
+        prs2[0][1]=prs4[0][1]+vec2[0][0]*sinf(vec2[0][1])*cosf(vec2[0][2]);
+        prs2[0][2]=prs4[0][2]+vec2[0][0]*sinf(vec2[0][2]);
 
-        prs2[1][0]=prs[1][0]+vec2[1][0]*cosf(vec2[1][1])*cosf(vec2[1][2]);
-        prs2[1][1]=prs[1][1]+vec2[1][0]*sinf(vec2[1][1])*cosf(vec2[1][2]);
-        prs2[1][2]=prs[1][2]+vec2[1][0]*sinf(vec2[1][2]);
+        prs2[1][0]=prs4[1][0]+vec2[1][0]*cosf(vec2[1][1])*cosf(vec2[1][2]);
+        prs2[1][1]=prs4[1][1]+vec2[1][0]*sinf(vec2[1][1])*cosf(vec2[1][2]);
+        prs2[1][2]=prs4[1][2]+vec2[1][0]*sinf(vec2[1][2]);
 
-        prs2[2][0]=prs[2][0]+vec2[2][0]*cosf(vec2[2][1])*cosf(vec2[2][2]);
-        prs2[2][1]=prs[2][1]+vec2[2][0]*sinf(vec2[2][1])*cosf(vec2[2][2]);
-        prs2[2][2]=prs[2][2]+vec2[2][0]*sinf(vec2[2][2]);
+        prs2[2][0]=prs4[2][0]+vec2[2][0]*cosf(vec2[2][1])*cosf(vec2[2][2]);
+        prs2[2][1]=prs4[2][1]+vec2[2][0]*sinf(vec2[2][1])*cosf(vec2[2][2]);
+        prs2[2][2]=prs4[2][2]+vec2[2][0]*sinf(vec2[2][2]);
     }
 
     glm::vec3 B;
@@ -225,21 +270,21 @@ void Pieza::addTrayectoBez(const glm::mat3x3& prs,const glm::mat3x3& vec1,const 
         float t=ut*i; //Calculamos el valor de "t";
 
         //Posición
-            B.x=prs0[0][0]*pow(1-t,3) + 3*prs1[0][0]*t*pow(1-t,2) + 3*prs2[0][0]*pow(t,2)*(1-t) + prs[0][0]*pow(t,3);
-            B.y=prs0[0][1]*pow(1-t,3) + 3*prs1[0][1]*t*pow(1-t,2) + 3*prs2[0][1]*pow(t,2)*(1-t) + prs[0][1]*pow(t,3);
-            B.z=prs0[0][2]*pow(1-t,3) + 3*prs1[0][2]*t*pow(1-t,2) + 3*prs2[0][2]*pow(t,2)*(1-t) + prs[0][2]*pow(t,3);
+            B.x=prs0[0][0]*pow(1-t,3) + 3*prs1[0][0]*t*pow(1-t,2) + 3*prs2[0][0]*pow(t,2)*(1-t) + prs4[0][0]*pow(t,3);
+            B.y=prs0[0][1]*pow(1-t,3) + 3*prs1[0][1]*t*pow(1-t,2) + 3*prs2[0][1]*pow(t,2)*(1-t) + prs4[0][1]*pow(t,3);
+            B.z=prs0[0][2]*pow(1-t,3) + 3*prs1[0][2]*t*pow(1-t,2) + 3*prs2[0][2]*pow(t,2)*(1-t) + prs4[0][2]*pow(t,3);
             trayectop.push_back(B);
 
         //Rotación
-            B.x=prs0[1][0]*pow(1-t,3) + 3*prs1[1][0]*t*pow(1-t,2) + 3*prs2[1][0]*pow(t,2)*(1-t) + prs[1][0]*pow(t,3);
-            B.y=prs0[1][1]*pow(1-t,3) + 3*prs1[1][1]*t*pow(1-t,2) + 3*prs2[1][1]*pow(t,2)*(1-t) + prs[1][1]*pow(t,3);
-            B.z=prs0[1][2]*pow(1-t,3) + 3*prs1[1][2]*t*pow(1-t,2) + 3*prs2[1][2]*pow(t,2)*(1-t) + prs[1][2]*pow(t,3);
+            B.x=prs0[1][0]*pow(1-t,3) + 3*prs1[1][0]*t*pow(1-t,2) + 3*prs2[1][0]*pow(t,2)*(1-t) + prs4[1][0]*pow(t,3);
+            B.y=prs0[1][1]*pow(1-t,3) + 3*prs1[1][1]*t*pow(1-t,2) + 3*prs2[1][1]*pow(t,2)*(1-t) + prs4[1][1]*pow(t,3);
+            B.z=prs0[1][2]*pow(1-t,3) + 3*prs1[1][2]*t*pow(1-t,2) + 3*prs2[1][2]*pow(t,2)*(1-t) + prs4[1][2]*pow(t,3);
             trayector.push_back(B);
 
         //Escala
-            B.x=prs0[2][0]*pow(1-t,3) + 3*prs1[2][0]*t*pow(1-t,2) + 3*prs2[2][0]*pow(t,2)*(1-t) + prs[2][0]*pow(t,3);
-            B.y=prs0[2][1]*pow(1-t,3) + 3*prs1[2][1]*t*pow(1-t,2) + 3*prs2[2][1]*pow(t,2)*(1-t) + prs[2][1]*pow(t,3);
-            B.z=prs0[2][2]*pow(1-t,3) + 3*prs1[2][2]*t*pow(1-t,2) + 3*prs2[2][2]*pow(t,2)*(1-t) + prs[2][2]*pow(t,3);
+            B.x=prs0[2][0]*pow(1-t,3) + 3*prs1[2][0]*t*pow(1-t,2) + 3*prs2[2][0]*pow(t,2)*(1-t) + prs4[2][0]*pow(t,3);
+            B.y=prs0[2][1]*pow(1-t,3) + 3*prs1[2][1]*t*pow(1-t,2) + 3*prs2[2][1]*pow(t,2)*(1-t) + prs4[2][1]*pow(t,3);
+            B.z=prs0[2][2]*pow(1-t,3) + 3*prs1[2][2]*t*pow(1-t,2) + 3*prs2[2][2]*pow(t,2)*(1-t) + prs4[2][2]*pow(t,3);
             trayectos.push_back(B);
     }
 }
